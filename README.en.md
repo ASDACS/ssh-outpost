@@ -255,7 +255,7 @@ and are uploaded to the base together with that software's deployment.
 - **Idle exit**: checked every 60 seconds; exit only when there have been no requests, no in-flight requests, no running jobs, and no live child processes for `idle_timeout`. Long jobs and slow clients are never interrupted by the idle logic.
 - **Backpressure**: streaming events are written to the socket in blocking mode; if the client reads slowly, the output thread is blocked, the OS pipe fills up, and the child process naturally suspends. **No data is dropped**.
 - **Output truncation**: job mode only; each stream keeps half of the head and half of the tail, inserts `...<truncated N bytes>...` in the middle, and marks `truncated`.
-- **Security boundary**: loopback-only listening plus a per-instance random token handshake; the base makes no authorization/sandbox decisions—all decisions are made by the client, and on a root remote it is equivalent to full trust, intentionally so.
+- **Security boundary**: loopback-only listening plus a per-instance random token handshake; the base makes no authorization/sandbox decisions—all decisions are made by the client, and on a root remote it is equivalent to full trust, intentionally so. The plugin is an extension of the client. The client is responsible for the consequences and resource consumption of the plugin itself.
 
 ## Tests
 
